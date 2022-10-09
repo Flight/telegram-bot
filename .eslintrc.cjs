@@ -1,7 +1,7 @@
 module.exports = {
   env: {
-    browser: true,
-    es2021: true,
+    es6: true,
+    node: true,
   },
   extends: [
     "eslint:recommended",
@@ -9,7 +9,6 @@ module.exports = {
     "airbnb-base",
     "prettier",
   ],
-  overrides: [],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -19,13 +18,11 @@ module.exports = {
   rules: {
     "prettier/prettier": ["error"],
   },
-  ignorePatterns: [".eslintrc.cjs"],
-  "import/parsers": {
-    "@typescript-eslint/parser": [".ts", ".tsx"],
-  },
-  "import/resolver": {
-    typescript: {
-      alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
-    },
+  ignorePatterns: [".eslintrc.cjs", "/build/**/*"],
+  rules: {
+    // Preventng default exports
+    // https://www.codeandchaos.com/2021/2021-09-26-JavaScriptDefaultExport/
+    "import/no-default-export": "error",
+    "import/prefer-default-export": 0,
   },
 };
