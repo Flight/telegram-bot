@@ -11,7 +11,9 @@
     "shell": "pnpm run build && firebase functions:shell",
     "start": "pnpm run shell",
     "push": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "local:bot:start": "curl --request POST 'http://localhost:5001/nlkryivka-bot/us-central1/startBot' --header 'Content-Type: application/json' --data-raw '{\"data\": \"\"}'",
+    "bot:start": "gcloud functions call startBot --data '{\"data\": \"\"}'"
   },
   "dependencies": {
     "@firebase/app-types": "^0.8.0",

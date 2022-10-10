@@ -16,5 +16,7 @@ env.yaml
 .env.yaml
 .env
 
+service-key.json
+
 firebase-debug.log
 ui-debug.log
