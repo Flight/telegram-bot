@@ -7,18 +7,18 @@
     "lint": "eslint --ext .ts .",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "serve": "pnpm run build && firebase emulators:start --only functions && build:watch",
-    "shell": "pnpm run build && firebase functions:shell",
-    "start": "pnpm run shell",
+    "start": "pnpm build:watch | firebase emulators:start --only functions",
+    "functions:shell": "pnpm run build && firebase functions:shell",
+    "shell": "pnpm run shell",
     "push": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "local:bot:start": "curl --request POST 'http://localhost:5001/nlkryivka-bot/us-central1/startBot' --header 'Content-Type: application/json' --data-raw '{\"data\": \"\"}'",
-    "bot:start": "gcloud functions call startBot --data '{\"data\": \"\"}'"
+    "bot:start": "curl --request POST 'http://localhost:5001/nlkryivka-bot/us-central1/startBot' --header 'Content-Type: application/json' --data-raw '{\"data\": \"\"}'",
+    "bot:start:prod": "gcloud functions call startBot --data '{\"data\": \"\"}'"
   },
   "dependencies": {
     "@firebase/app-types": "^0.8.0",
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.0",
+    "firebase-functions": "4.0.0-rc.0",
     "telegraf": "^4.10.0",
     "yamlenv": "^1.0.0"
   },

@@ -6,7 +6,7 @@ import { config } from "yamlenv";
 
 config();
 
-const startBot = functions.https.onCall(() => {
+const startBot = functions.https.onCall(async () => {
   const botToken = process.env.BOT_TOKEN;
   const chatId = process.env.CHAT_ID;
   const adminChatId = process.env.ADMIN_CHAT_ID;
@@ -20,10 +20,12 @@ const startBot = functions.https.onCall(() => {
     return "Please provide the BOT_TOKEN, CHAT_ID, ADMIN_CHAT_ID!";
   }
 
-  const telegram: Telegram = new Telegram(process.env.BOT_TOKEN as string);
+  const bot: Telegram = new Telegram(process.env.BOT_TOKEN as string);
   functions.logger.info("The bot is connected!");
-  telegram.sendMessage(adminChatId, "The bot is connected!");
-  return "The bot is connected!";
+  bot.sendMessage(adminChatId, "The bot is connected!");
+  const updates = await bot.getUpdates(1000, 10, 0, undefined);
+  functions.logger.info(updates);
+  return updates;
 });
 
 export { startBot };
